@@ -1,7 +1,9 @@
 from aiogram import F, Router
 from aiogram.filters import CommandStart
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 from functions import *
+
+import keyboards as kb
 
 
 router = Router()
@@ -11,11 +13,12 @@ update()
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.answer("Привет,что хочешь сделать?")
-    markup = types.ReplyKeyboardMarkup()
-    markup.add(types.KeyboardButton("Проверить знания"))
-    markup.add(types.KeyboardButton("Редактировать"))
-    bot.register_next_step_handler(message, on_click)
+    await message.answer("Привет,что хочешь сделать?", reply_markup=kb.main)
+
+@router.callback_query(F.data == "check")
+async def check(callback: CallbackQuery):
+    await callback.message.answer("Вы выбрали проверить знания")
+    
 
 
 def edit_menu():
