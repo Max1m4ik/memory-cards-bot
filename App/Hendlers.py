@@ -3,7 +3,7 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery
 from functions import *
 
-import keyboards as kb
+import App.keyboards as kb
 
 
 router = Router()
@@ -18,8 +18,6 @@ async def cmd_start(message: Message):
 @router.callback_query(F.data == "check")
 async def check(callback: CallbackQuery):
     await callback.message.answer("Вы выбрали проверить знания")
-    
-
 
 def edit_menu():
         bot.send_message(message.chat.id, "РЕдактировать")
