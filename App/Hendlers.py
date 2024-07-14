@@ -5,7 +5,8 @@ from functions import *
 import sqlite3 as sq
 
 import App.keyboards as kb
-
+question_for_add = ''
+answer_for_add = ''
 router = Router()
 correct = 0
 stage = 'null' 
@@ -18,6 +19,8 @@ async def cmd_start(message: Message):
 @router.message(F.text)
 async def answer_from_user(message: Message):
     global stage
+    global question_for_add
+    global answer_for_add
     if stage == 'chek':
         for i in range(1, col_of_q):
             quest(i)
@@ -38,13 +41,11 @@ async def answer_from_user(message: Message):
     
     elif stage == 'change1':
 
-        global question_for_add
         question_for_add = F.text
         await message.answer("Ответ: ")
         stage = 'change2'
 
     elif stage == 'change2':
-
         answer_for_add = F.text
         with sq.connect('cards.db') as con:
             cur = con.cursor()
