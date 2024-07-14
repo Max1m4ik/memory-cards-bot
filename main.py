@@ -1,8 +1,9 @@
 from functions import *
 from config import TOKEN
-from App.Hendlers import router
+from App.Hendlers import *
 import asyncio
 from aiogram import Bot, Dispatcher
+
 
 #https://t.me/Cards_for_memory_bot
 
